@@ -1,0 +1,25 @@
+﻿@model AirConditionerSystem.Models.ServiceRequests.AssignRequestToTechInputModel
+@{
+	this.ViewData["Title"] = "Assign Request";
+}
+
+<h1 class="mr-3">@this.ViewData["Title"]</h1>
+<form method="post" enctype="multipart/form-data">
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<div class="form-group">
+		<label asp-for="VisitedOn"></label>
+		<input asp-for="VisitedOn" class="form-control" />
+		<span asp-validation-for="VisitedOn" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="TechId"></label>
+		<select asp-for="TechId" asp-items="@this.Model.TechItems" class="form-control"></select>
+		<span asp-validation-for="TechId" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Assign" />
+	</div>
+</form>

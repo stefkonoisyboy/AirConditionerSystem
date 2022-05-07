@@ -1,0 +1,22 @@
+﻿@model AirConditionerSystem.Models.ServiceRequests.EditStatusInputModel
+@{
+	this.ViewData["Title"] = "Edit Status";
+}
+
+<h1 class="mr-3">@this.ViewData["Title"]</h1>
+<form method="post">
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<div class="form-group">
+		<label asp-for="Status"></label>
+		<select class="form-control" asp-for="Status" asp-items="@Html.GetEnumSelectList<AirConditionerSystem.Data.Enumerations.Status>()">
+		</select>
+		<span asp-validation-for="Status" class="text-danger"></span>
+	</div>
+
+	<input type="hidden" asp-for="Id" />
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-warning" value="Edit" />
+	</div>
+</form>

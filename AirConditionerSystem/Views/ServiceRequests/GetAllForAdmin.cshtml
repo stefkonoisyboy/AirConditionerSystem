@@ -1,0 +1,69 @@
+﻿@model AirConditionerSystem.Models.ServiceRequests.GetAllServiceRequestsForAdminListViewModel
+@{
+	this.ViewData["Title"] = "All Filtered Requests";
+}
+
+@if (this.TempData.ContainsKey("Success"))
+{
+	<div class="alert alert-success">
+		@this.TempData["Success"]
+	</div>
+}
+
+<h1 class="mr-3">@this.ViewData["Title"]</h1>
+
+@if (this.Model.Requests.Count() == 0)
+{
+	<h1>There are no requests yet!</h1>
+}
+else
+{
+	<form asp-action="GetAllForAdminFiltered">
+		<div class="form-group">
+			<label asp-for="Filter.Id"></label>
+			<select class="form-control" asp-for="Filter.Id" asp-items="@this.Model.Filter.UserItems"></select>
+		</div>
+
+		<div class="form-group">
+			<input type="submit" value="Search" class="btn btn-success" />
+		</div>
+	</form>
+
+	<table class="table table-striped table-success">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Address</th>
+				<th>Image</th>
+				<th>Status</th>
+				<th>Visitor</th>
+				<th>Visited On</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var request in this.Model.Requests)
+			{
+				<tr>
+					<td>@request.Name</td>
+					<td>@request.Description</td>
+					<td>@request.Address</td>
+					<td>
+						<img src="@request.Image" style="border-radius: 50%;" width="50" height="50" alt="requestImage" />
+					</td>
+					<td>@request.Status.ToString()</td>
+					<td>@request.Visitor</td>
+					<td>@request.VisitedOn.ToString("dd/MM/yyyy")</td>
+					<td>
+						<a class="mr-2 btn btn-warning" asp-action="Edit" asp-route-id="@request.Id">Edit</a>
+						<a class="mr-2 btn btn-info" asp-action="Assign" asp-route-id="@request.Id">Assign</a>
+						<form method="post" asp-action="Delete" asp-route-id="@request.Id">
+							<input type="submit" value="Delete" class="btn btn-danger" />
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

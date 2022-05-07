@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AirConditionerSystem.Models.Users.AllUserViewModel>
+@{
+	this.ViewData["Title"] = "All Users";
+}
+
+@if (this.TempData.ContainsKey("Success"))
+{
+	<div class="alert alert-success">
+		@this.TempData["Success"]
+	</div>
+}
+
+<h1 class="mr-3">@this.ViewData["Title"]</h1>
+
+@if (this.Model.Count() == 0)
+{
+	<h1>There are no users yet!</h1>
+}
+else
+{
+	<table class="table table-striped table-success">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Actons</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in this.Model)
+			{
+				<tr>
+					<td>@user.Email</td>
+					<td>@user.Role</td>
+					<td>
+						<a class="mr-2 btn btn-warning" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+						<form method="post" asp-action="Delete" asp-route-id="@user.Id">
+							<input type="submit" value="Delete" class="btn btn-danger" />
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

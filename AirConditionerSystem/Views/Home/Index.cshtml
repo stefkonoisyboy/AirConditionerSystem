@@ -1,0 +1,22 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+@if (this.TempData.ContainsKey("Success"))
+{
+	<div class="alert alert-success">
+		@this.TempData["Success"]
+	</div>
+}
+
+@if (this.TempData.ContainsKey("Error"))
+{
+	<div class="alert alert-danger">
+		@this.TempData["Error"]
+	</div>
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
